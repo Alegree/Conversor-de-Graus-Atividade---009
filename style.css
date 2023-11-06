@@ -1,35 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
+body,
+html {
+    height: 100%;
+    margin: 0;
+}
+
 body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ecf0f1;
     font-family: 'Poppins', sans-serif;
-    margin: 50px;
 }
 
-h1,
-h4 {
+.container {
     text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.output {
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-li {
-    list-style-type: none;
-    display: block;
-    margin-top: 10px;
-}
-
-label {
-    text-decoration: underline;
-}
-
-input[type=number] {
-    width: 20%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
+.referencia {
+    text-align: center;
 }
 
 button {
@@ -39,6 +33,11 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: grey;
+    background-color: rgb(107, 102, 102);
     color: white;
+}
+
+#resultado {
+    margin-top: 20px;
+    font-weight: bold;
 }

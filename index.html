@@ -5,55 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Atividade 008</title>
+    <title>Conversor de Temperatura</title>
 </head>
 
 <body>
-    <h1>Atividade 008 - Rodrigo Alegre 12ºE</h1>
-    <h4>Com 2 tipos de outputs (innerHTML e console.log)</h4>
+    <div class="container">
+        <h1>Conversor de Temperatura</h1>
+        <h5>Rodrigo Alegre 12ºE</h5>
+        <hr>
+        <button type="button" onclick="converterTemperatura()">Converter</button>
 
-    <form id="calculadora">
+        <div id="resultado"></div>
+        <hr>
+        <p class="referencia">Referências:</p>
         <ul>
-            <li><label for="valor">Valor:</label>
-                <input type="number" id="valor" name="valor" required>
-            </li>
-
-            <li><label for="base">Base do retângulo:</label>
-                <input type="number" id="base" name="base">
-
-
-                <label for="altura">Altura do retângulo:</label>
-                <input type="number" id="altura" name="altura">
-            </li>
-
-            <li> <label for="idadeAnos">Idade ( em anos):</label>
-                <input type="number" id="idadeAnos" name="idadeAnos">
-            </li>
-
-            <li><label for="idadeDias">Idade (em dias):</label>
-                <input type="number" id="idadeDias" name="idadeDias">
-            </li>
-
-            <li><label for="valorProduto">Valor do Produto:</label>
-                <input type="number" id="valorProduto" name="valorProduto">
-            </li>
-
-            <li> <label for="numero">Número:</label>
-                <input type="number" id="numero" name="numero">
-            </li>
-
-            <li> <label for="raio">Raio:</label>
-                <input type="number" id="raio" name="raio">
-            </li>
-
-            <li><button type="button" onclick="calcular()">Calcular</button></li>
+            <li><a href="https://www.nist.gov/pml/weights-and-measures/guide-si-units-temperature" target="_blank">NIST
+                    Guide
+                    to SI Units - Temperature</a></li>
         </ul>
-    </form>
-
-    <div id="outputConsole" class="output"></div>
-    <div id="outputHTML" class="output"></div>
-
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>

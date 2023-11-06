@@ -1,64 +1,71 @@
-function calcular() {
-    // Buscar Valores ao input do html
-    const valor = parseFloat(document.getElementById('valor').value);
-    const base = parseFloat(document.getElementById('base').value);
-    const altura = parseFloat(document.getElementById('altura').value);
-    const idadeAnos = parseFloat(document.getElementById('idadeAnos').value);
-    const idadeDiasInput = parseFloat(document.getElementById('idadeDias').value);
-    const valorProduto = parseFloat(document.getElementById('valorProduto').value);
-    const numero = parseFloat(document.getElementById('numero').value);
-    const raio = parseFloat(document.getElementById('raio').value);
+function converterTemperatura() {
+    // Obter valores do formulário
+    const temperatura = parseFloat(prompt("Digite a temperatura:"));
+    const escala = prompt("Escolha a escala (celsius, fahrenheit, kelvin):");
 
-    // Verificar se algum campo está vazio ou não é um número
-    if (isNaN(valor) || isNaN(base) || isNaN(altura) || isNaN(idadeDiasInput) || isNaN(valorProduto) || isNaN(numero) || isNaN(raio)) {
-        alert("Por favor, preencha todos os campos com números.");
+
+    // Verificação de valores
+    if (isNaN(temperatura)) {
+        alert("Por favor, digite um valor de temperatura e a respetiva escala.");
+        return
+    }
+    if ((escala === 'kelvin' && temperatura < 0) || (escala === 'celsius' && temperatura <= -273.15) || (escala === 'fahrenheit' && temperatura <= -459.67)) {
+
+        alert("Digite um valor válido, não existe esse valor")
         return;
     }
-    // Calcular sucessor e antecessor
-    const sucessor = valor + 1;
-    const antecessor = valor - 1;
+    // Converter temperatura
+    let resultado;
+    switch (escala) {
+        case 'celsius':
+            resultado = {
+                fahrenheit: (temperatura * 1.8) + 32,
+                kelvin: temperatura + 273.15
+            };
+            break;
+        case 'fahrenheit':
+            resultado = {
+                celsius: (temperatura - 32) / 1.8,
+                kelvin: (temperatura - 32) / 1.8 + 273.15
+            };
+            break;
+        case 'kelvin':
+            resultado = {
+                celsius: temperatura - 273.15,
+                fahrenheit: (temperatura - 273.15) * 1.8 + 32
+            };
+            break;
+        default:
+            alert("Escala inválida. Escolha entre celsius, fahrenheit, ou kelvin.");
+            return;
+    }
 
-    // Calcular área e perímetro do retângulo
-    const area = base * altura;
-    const perimetro = 2 * (base + altura);
-
-    // Calcular idade em dias
-    const idadeDias = idadeAnos * 365;
-
-    // Calcular idade em anos com um número decimal
-    const idadeAnosDecimal = idadeDiasInput / 365;
-
-    // Calcular valor com 10% de desconto
-    const valorComDesconto = valorProduto * 0.9;
-
-    // Calcular metade, dobro, quadrado e cubo
-    const metade = numero / 2;
-    const dobro = numero * 2;
-    const quadrado = numero * numero;
-    const cubo = numero ** 3;
-
-    // Calcular perimetro e area do circulo
-    const perimetroCirculo = 2 * Math.PI * raio;
-    const areaCirculo = Math.PI * Math.pow(raio, 2);
-
-    // Mostrar resultados na consola
-    console.log("Resultados:");
-    console.log("Sucessor e Antecessor do Valor: Sucessor =", sucessor, "Antecessor =", antecessor);
-    console.log("Área/Períemtro: Área do retângulo =", area, "Perímetro do retângulo =", perimetro);
-    console.log("Idade de anos para dias: Idade em dias =", idadeDias);
-    console.log("Idade de dias para anos: Idade em anos =", idadeAnosDecimal.toFixed(1));
-    console.log("Desconto do produto: Valor com 10% de desconto =", valorComDesconto);
-    console.log("Metade/dobro/quadrado/cubo do número: Metade =", metade, "Dobro =", dobro, "Quadrado =", quadrado, "Cubo =", cubo);
-    console.log("Perímetro e Área do círculo: Perímetro =", perimetroCirculo.toFixed(2), "Área =", areaCirculo.toFixed(2));
-
-    // Mostrar resultados em elementos HTML
-    document.getElementById('outputHTML').innerHTML = `
-          <p>Sucessor e Antecessor do Valor: Sucessor = ${sucessor}, Antecessor = ${antecessor}</p>
-          <p>Área/Períemtro: Área do retângulo = ${area}, Perímetro do retângulo = ${perimetro}</p>
-          <p>Idade de anos para dias: Idade em dias = ${idadeDias}</p>
-          <p>Idade de dias para anos: Idade em anos = ${idadeAnosDecimal.toFixed(1)}</p>
-          <p>Desconto do produto: Valor com 10% de desconto = ${valorComDesconto}</p>
-          <p>Metade/dobro/quadrado/cubo do número: Metade = ${metade}, Dobro = ${dobro}, Quadrado = ${quadrado}, Cubo = ${cubo}</p>
-          <p>Perímetro e Área do círculo: Perímetro = ${perimetroCirculo.toFixed(2)}, Área = ${areaCirculo.toFixed(2)}</p>
+    // Exibir resultado na página
+    const resultadoDiv = document.getElementById('resultado');
+    resultadoDiv.innerHTML = `
+        <p>${temperatura.toFixed(2)} graus ${escala} é equivalente a:</p>
+        <ul>
+          ${resultado.celsius ? `<li>${resultado.celsius.toFixed(2)} graus Celsius</li>` : ''}
+          ${resultado.fahrenheit ? `<li>${resultado.fahrenheit.toFixed(2)} graus Fahrenheit</li>` : ''}
+          ${resultado.kelvin ? `<li>${resultado.kelvin.toFixed(2)} graus Kelvin</li>` : ''}
+        </ul>
       `;
+
+    updateBackground(temperatura, escala); // Atualizar cor de fundo com base na temperatura e escala
+}
+
+function updateBackground(temperatura, escala) {
+    const body = document.body;
+
+    if ((escala === 'celsius' && temperatura <= 10) ||
+        (escala === 'fahrenheit' && temperatura <= 50) ||
+        (escala === 'kelvin' && temperatura <= 283.15)) {
+        body.style.backgroundColor = '#3498db'; // Azul no caso de frio
+    } else if ((escala === 'celsius' && temperatura >= 30) ||
+        (escala === 'fahrenheit' && temperatura >= 86) ||
+        (escala === 'kelvin' && temperatura >= 303.15)) {
+        body.style.backgroundColor = '#e74c3c'; // Vermelho no caso de quente
+    } else {
+        body.style.backgroundColor = '#f39c12'; // Amarelo no caso de ameno
+    }
 }
